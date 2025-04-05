@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <body>
-    <video id="camera" autoplay playsinline></video>
+    <video id="camera" autoplay playsinline muted></video>
     <script>
       navigator.mediaDevices.getUserMedia({ video: true })
         .then(stream => {
