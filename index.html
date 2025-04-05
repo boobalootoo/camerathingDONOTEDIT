@@ -1,32 +1,20 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Mobile Camera Test</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-      video {
-        width: 100vw;
-        height: auto;
-      }
-    </style>
-  </head>
   <body>
-    <video id="camera" autoplay playsinline muted></video>
+    <button id="start">Start Camera</button>
+    <br>
+    <video id="camera" autoplay playsinline muted style="width:100%; max-width:600px;"></video>
 
     <script>
-      const video = document.getElementById('camera');
-
-      async function startCamera() {
+      document.getElementById('start').onclick = async () => {
         try {
           const stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' } });
-          video.srcObject = stream;
+          document.getElementById('camera').srcObject = stream;
         } catch (err) {
-          console.error('Error accessing camera:', err.name, err.message);
           alert('Camera error: ' + err.message);
+          console.error('Camera error:', err);
         }
-      }
-
-      startCamera();
+      };
     </script>
   </body>
 </html>
