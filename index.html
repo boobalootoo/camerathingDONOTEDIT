@@ -49,6 +49,7 @@
             padding: 10px 20px;
             border-radius: 5px;
             z-index: 100;
+            text-align: center;
         }
     </style>
 </head>
@@ -92,7 +93,15 @@
             })
             .catch(error => {
                 console.error('Error accessing camera:', error);
-                displayErrorMessage('Camera access denied or unavailable.');
+                let message = 'Camera access denied or unavailable.';
+                if (error.name === 'NotAllowedError') {
+                    message = 'Camera access denied. Please allow camera access in your device settings.';
+                } else if (error.name === 'NotFoundError') {
+                    message = 'No camera found. Make sure a camera is connected and enabled.';
+                } else if (error.name === 'PermissionDeniedError'){
+                    message = 'Camera access denied. Please allow camera access in your browser settings.';
+                }
+                displayErrorMessage(message);
             });
         }
 
